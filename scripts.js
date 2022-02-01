@@ -32,8 +32,6 @@ window.addEventListener('load', () => {
     flightStatus.innerHTML = 'The shuttle has landed.';
     shuttleFlightScreen.style.backgroundColor = 'green';
     shuttleHeight.innerHTML = '0';
-    rocketImage.style.bottom = '0px';
-    rocketImage.style.left = '0px';
   });
 
   abortMissionButton.addEventListener('click', () => {
@@ -42,8 +40,6 @@ window.addEventListener('load', () => {
       flightStatus.innerHTML = 'Mission aborted.';
       shuttleFlightScreen.style.backgroundColor = 'green';
       shuttleHeight.innerHTML = '0';
-      rocketImage.style.bottom = '0px';
-      rocketImage.style.left = '0px';
     }
   });
 
