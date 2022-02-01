@@ -16,6 +16,9 @@ window.addEventListener('load', () => {
   let rightButton = document.getElementById('right');
   let leftButton = document.getElementById('left');
 
+  let spaceHeight = shuttleFlightScreen.clientHeight;
+  let spaceWidth = shuttleFlightScreen.clientWidth;
+
   takeOffButton.addEventListener('click', () => {
     let result = window.confirm(
       'Confirm that the shuttle is ready for takeoff.'
@@ -49,23 +52,47 @@ window.addEventListener('load', () => {
 
   // click event listener approach
   upButton.addEventListener('click', () => {
-    rocketImage.style.bottom = parseInt(rocketImage.style.bottom) + 10 + 'px';
-    shuttleHeight.innerHTML = Number(shuttleHeight.innerHTML) + 10000;
+    if (rocketImage.offsetTop > 0) {
+      rocketImage.style.bottom = incrementDistance(rocketImage, 'up');
+      shuttleHeight.innerHTML = Number(shuttleHeight.innerHTML) + 10000;
+    }
   });
 
   downButon.addEventListener('click', () => {
-    rocketImage.style.bottom = parseInt(rocketImage.style.bottom) - 10 + 'px';
-    shuttleHeight.innerHTML = Number(shuttleHeight.innerHTML) - 10000;
+    if (spaceHeight - rocketImage.offsetTop > rocketImage.clientHeight) {
+      rocketImage.style.bottom = decrementDistance(rocketImage, 'down');
+      shuttleHeight.innerHTML = Number(shuttleHeight.innerHTML) - 10000;
+    }
   });
 
   leftButton.addEventListener('click', () => {
-    rocketImage.style.left = parseInt(rocketImage.style.left) - 10 + 'px';
+    if (rocketImage.offsetLeft > 0) {
+      rocketImage.style.left = decrementDistance(rocketImage, 'left');
+    }
   });
 
   rightButton.addEventListener('click', () => {
-    rocketImage.style.left = parseInt(rocketImage.style.left) + 10 + 'px';
+    if (spaceWidth - rocketImage.offsetLeft > rocketImage.clientWidth) {
+      rocketImage.style.left = incrementDistance(rocketImage, 'right');
+    }
   });
 });
+
+function incrementDistance(rocket, direction) {
+  if (direction === 'up') {
+    return parseInt(rocket.style.bottom) + 10 + 'px';
+  } else {
+    return parseInt(rocket.style.left) + 10 + 'px';
+  }
+}
+
+function decrementDistance(rocket, direction) {
+  if (direction === 'down') {
+    return parseInt(rocket.style.bottom) - 10 + 'px';
+  } else {
+    return parseInt(rocket.style.left) - 10 + 'px';
+  }
+}
 
 // onclick approach
 // function moveUp(rocketImage) {
